@@ -18,17 +18,18 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }))
-
+app.use(require('./middlewares/flash'))
 
 // routes
 app.get('/', (request, response) => {
+  console.log(request.session)
   response.render('pages/index')
 });
 
 app.post('/', (request, response) => {
-  if (request.body.message === "undifined" || request.body.message ==="") {
-    request.session.error = "Erreur 😖"
-    response.render('pages/index', {error: "Pas de message 😢"})
+  if (request.body.message === false || request.body.message ==="") {
+    request.flash('error', "Erreur 😖")
+    response.redirect('/')
   }
 })
 
