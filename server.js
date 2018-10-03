@@ -29,8 +29,13 @@ app.get('/', (request, response) => {
 app.post('/', (request, response) => {
   if (request.body.message === undefined || request.body.message ==="") {
     request.flash('error', "Erreur 😖")
-    response.redirect('/')
+  } else {
+    let Message = require('./models/message')
+    Message.create(request.body.message, function () {
+      request.flash('success', "Bien ouej ! 🎉")
+    })
   }
+  response.redirect('/')
 })
 
 
