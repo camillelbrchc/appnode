@@ -27,7 +27,7 @@ app.get('/', (request, response) => {
 });
 
 app.post('/', (request, response) => {
-  if (request.body.message === false || request.body.message ==="") {
+  if (request.body.message === undefined || request.body.message ==="") {
     request.flash('error', "Erreur 😖")
     response.redirect('/')
   }
